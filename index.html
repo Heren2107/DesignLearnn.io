@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignLearn - Platform Belajar Design Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo" id="homeLogo">DesignLearn</div>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" class="nav-link" data-view="home">Beranda</a></li>
+                    <li><a href="#" class="nav-link" data-view="courses">Kursus</a></li>
+                    <li><a href="#" class="nav-link" data-view="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link contact-link">Kontak</a></li>
+                </ul>
+                
+                <!-- Tambahkan section untuk Chat Course View -->
+                <div id="courseChatView" class="view">
+                    <div class="container">
+                        <button class="back-btn back-to-detail">← Kembali</button>
+                        <div id="courseChatContent"></div>
+                    </div>
+                </div>
+                <div class="auth-controls">
+                    <button class="cta-btn" id="loginBtn">Masuk</button>
+                    <div id="userMenuContainer" class="user-menu-container" style="display:none;">
+                        <button class="user-profile-btn" id="userProfileBtn">
+                            <span class="user-avatar">👤</span>
+                            <span class="user-name" id="userNameDisplay"></span>
+                            <span class="user-menu-arrow">▼</span>
+                        </button>
+                        <div class="user-dropdown-menu" id="userDropdownMenu">
+                            <button class="dropdown-item" data-action="dashboard">
+                                <span>📊</span> Dashboard
+                            </button>
+                            <button class="dropdown-item" data-action="my-projects">
+                                <span>🎨</span> Profile Saya
+                            </button>
+                            <button class="dropdown-item" data-action="add-account">
+                                <span>➕</span> Tambah Akun
+                            </button>
+                            <button class="dropdown-item" data-action="switch-account">
+                                <span>🔄</span> Ganti Akun
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item delete-item" data-action="delete-account">
+                                <span>🗑️</span> Hapus Akun
+                            </button>
+                            <button class="dropdown-item logout-item" data-action="logout">
+                                <span>🚪</span> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main id="appContainer" class="app-container">
+        <!-- Home View -->
+        <div id="homeView" class="view active">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Belajar Design dari Nol Hingga Profesional</h1>
+                        <p>Platform pembelajaran design terlengkap dengan kursus terstruktur, quiz interaktif, dan case study nyata</p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <h3>5000+</h3>
+                                <p>Siswa Aktif</p>
+                            </div>
+                            <div class="stat">
+                                <h3>50+</h3>
+                                <p>Kursus</p>
+                            </div>
+                            <div class="stat">
+                                <h3>250+</h3>
+                                <p>Instruktur</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-courses-btn">Lihat Kursus</button>
+                    </div>
+                        <div class="custom-shape-divider-bottom-1764353526">
+                         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- tasteful hero decorations (subtle moving shapes) -->
+                    <div class="hero-decor" aria-hidden="true">
+                        <span class="hero-blob blob-a"></span>
+                        <span class="hero-blob blob-b"></span>
+                        <span class="hero-dot dot-a"></span>
+                    </div>
+                </div>
+            </section>
+            <section class="benefits">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Manfaat Belajar di DesignLearn</h2>
+                        <div class="decorative-line"></div>
+                    </div>
+                      
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-number">01</div>
+                            <div class="benefit-icon">🎯</div>
+                            <h3>Belajar dengan Tujuan Jelas</h3>
+                            <p>Kurikulum dirancang khusus dengan milestone yang terukur dan achievable untuk setiap level</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-number">02</div>
+                            <div class="benefit-icon">⏰</div>
+                            <h3>Belajar Fleksibel</h3>
+                            <p>Akses semua kursus kapan saja dan dari mana saja sesuai dengan jadwal Anda</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-number">03</div>
+                            <div class="benefit-icon">💡</div>
+                            <h3>Praktik Langsung</h3>
+                            <p>Setiap level dilengkapi dengan case study nyata yang membuat Anda siap kerja</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-number">04</div>
+                            <div class="benefit-icon">🤝</div>
+                            <h3>Komunitas Supportif</h3>
+                            <p>Bergabung dengan ribuan designer lain dan saling berbagi pengalaman</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-number">05</div>
+                            <div class="benefit-icon">📈</div>
+                            <h3>Tracking Progress</h3>
+                            <p>Dashboard lengkap untuk memonitor perkembangan belajar Anda secara real-time</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-number">06</div>
+                            <div class="benefit-icon">🌟</div>
+                            <h3>Sertifikat Profesional</h3>
+                            <p>Dapatkan sertifikat yang diakui industri untuk meningkatkan karir Anda</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Fitur Unggulan</h2>
+                        <div class="decorative-line"></div>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3>Kursus Terstruktur</h3>
+                            <p>Setiap kursus memiliki 5 level dengan progression yang jelas dan terukur</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">✅</div>
+                            <h3>Quiz Interaktif</h3>
+                            <p>Setiap level memiliki 10 pertanyaan untuk mengukur pemahaman Anda</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💼</div>
+                            <h3>Case Study Real</h3>
+                            <p>Proyek nyata untuk mengaplikasikan skill yang telah dipelajari</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎓</div>
+                            <h3>Instruktur Expert</h3>
+                            <p>Belajar dari profesional dengan pengalaman puluhan tahun</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💳</div>
+                            <h3>Pembayaran Mudah</h3>
+                            <p>Pilih antara QRIS atau transfer rekening dengan aman</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🏆</div>
+                            <h3>Sertifikat</h3>
+                            <p>Dapatkan sertifikat setelah menyelesaikan semua level</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Courses List View -->
+        <div id="coursesView" class="view">
+            <section class="courses-section">
+                <div class="container">
+                    <h1>Katalog Kursus</h1>
+                    <p class="section-subtitle">Pilih kursus yang sesuai dengan minat dan level Anda</p>
+                    <div class="courses-grid" id="coursesGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Course Detail View -->
+        <div id="courseDetailView" class="view">
+            <div class="container course-detail-container">
+                <button class="back-btn back-to-courses">← Kembali</button>
+                <div id="courseDetailContent"></div>
+            </div>
+        </div>
+
+        <!-- Quiz View -->
+        <div id="quizView" class="view">
+            <div class="container">
+                <button class="back-btn back-to-detail">← Kembali</button>
+                <div id="quizContent"></div>
+            </div>
+        </div>
+
+        <!-- Case Study View -->
+        <div id="caseStudyView" class="view">
+            <div class="container">
+                <button class="back-btn back-to-detail">← Kembali</button>
+                <div id="caseStudyContent"></div>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboardView" class="view">
+            <div class="container">
+                <h1>Dashboard Siswa</h1>
+                <div id="dashboardContent"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DesignLearn</h3>
+                    <p>Platform pembelajaran design premium dengan kursus berkualitas tinggi dan instruktur berpengalaman.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak Pembuat</h4>
+                    <div class="creator-info">
+                        <p><strong>👤 Nama Pembuat:</strong> <span id="creatorName">Hardiansyah Tri Dharma</span></p>
+                        <p><strong>📧 Email:</strong> <a href="mailto:hardiansyahtd@gmail.com">hardiansyahtd@gmail.com</a></p>
+                        <div class="social-links">
+                            <a href="https://linkedin.com/in/farhanmauludin" target="_blank" title="LinkedIn">
+                                <span class="social-icon">💼 LinkedIn</span>
+                            </a>
+                            <a href="https://twitter.com/farhandev" target="_blank" title="Twitter">
+                                <span class="social-icon">𝕏 Twitter</span>
+                            </a>
+                            <a href="https://github.com/farhanmauludin" target="_blank" title="GitHub">
+                                <span class="social-icon">⚙️ GitHub</span>
+                            </a>
+                            <a href="https://instagram.com/farhan.design" target="_blank" title="Instagram">
+                                <span class="social-icon">📷 Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showView('home')">Beranda</a></li>
+                        <li><a href="#" onclick="showView('courses')">Kursus</a></li>
+                        <li><a href="#" onclick="showView('dashboard')">Dashboard</a></li>
+                        <li><a href="#" onclick="alert('Hubungi kami di farhan.dev@email.com')">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DesignLearn. Semua hak dilindungi. Dibuat dengan ❤️ oleh Hardiansyah Tri Dharma</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal" style="display:none;">
+        <div class="modal-overlay close-payment-overlay"></div>
+        <div class="modal-panel">
+            <button class="modal-close close-payment-btn">✕</button>
+            <h2>Pilih Metode Pembayaran</h2>
+            <div class="payment-options">
+                <button class="payment-option show-qris-btn">
+                    <div class="payment-icon">📱</div>
+                    <h3>QRIS</h3>
+                    <p>Scan QR Code dengan aplikasi pembayaran</p>
+                </button>
+                <button class="payment-option show-bank-btn">
+                    <div class="payment-icon">🏦</div>
+                    <h3>Transfer Bank</h3>
+                    <p>Transfer ke rekening DesignLearn</p>
+                </button>
+            </div>
+            <div id="qrisContent" style="display:none;" class="payment-details">
+                <h3>Bayar dengan QRIS</h3>
+                <div class="qris-code">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="200" height="200" fill="white"/>
+                        <rect x="10" y="10" width="40" height="40" fill="black"/>
+                        <rect x="150" y="10" width="40" height="40" fill="black"/>
+                        <rect x="10" y="150" width="40" height="40" fill="black"/>
+                        <rect x="60" y="60" width="80" height="80" fill="black" opacity="0.3"/>
+                    </svg>
+                </div>
+                <p id="qrisPrice" style="margin: 1rem 0; font-weight: bold;"></p>
+                <button class="btn btn-primary" onclick="completePayment('QRIS')">Konfirmasi Pembayaran</button>
+            </div>
+            <div id="bankContent" style="display:none;" class="payment-details">
+                <h3>Informasi Rekening</h3>
+                <div class="bank-info">
+                    <p><strong>Bank:</strong> BCA</p>
+                    <p><strong>Nomor Rekening:</strong> 1234567890</p>
+                    <p><strong>Atas Nama:</strong> PT Design Learn Indonesia</p>
+                    <p id="transferAmount" style="margin-top: 1rem; font-weight: bold;"></p>
+                </div>
+                <button class="btn btn-primary" onclick="completePayment('BANK')">Konfirmasi Pembayaran</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal" style="display:none;">
+        <div class="modal-overlay" onclick="closeAuthModal()"></div>
+        <div class="modal-panel auth-modal-panel">
+            <div class="auth-modal-header">
+                <div class="auth-logo-icon">🎨</div>
+                <h2 id="authTitle" class="auth-modal-title">Masuk ke DesignLearn</h2>
+                <p class="auth-modal-subtitle">Platform pembelajaran design terlengkap</p>
+            </div>
+            
+            <form id="signinForm" class="auth-form signin-form">
+                <div class="form-group">
+                    <label for="email">📧 Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">🔐 Password</label>
+                    <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-signin">Masuk ke Akun Saya</button>
+                <div class="auth-divider">
+                    <span>Atau</span>
+                </div>
+                <p class="auth-switch">Belum punya akun? <a href="#" onclick="showSignup(event)" class="auth-link">Daftar sekarang</a></p>
+            </form>
+            
+            <form id="signupForm" class="auth-form signup-form" style="display:none;">
+                <div class="form-group">
+                    <label for="signupName">👤 Nama Lengkap</label>
+                    <input type="text" id="signupName" name="name" placeholder="Nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">📧 Email Address</label>
+                    <input type="email" id="signupEmail" name="email" placeholder="nama@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">🔐 Password</label>
+                    <input type="password" id="signupPassword" name="password" placeholder="Min. 6 karakter" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-signup">Buat Akun Baru</button>
+                <div class="auth-divider">
+                    <span>Atau</span>
+                </div>
+                <p class="auth-switch">Sudah punya akun? <a href="#" onclick="showSignin(event)" class="auth-link">Masuk di sini</a></p>
+            </form>
+            
+            <button class="modal-close" onclick="closeAuthModal()">✕</button>
+        </div>
+    </div>
+
+    <!-- Tambahkan di akhir body sebelum script -->
+<div class="floating-chat-btn" onclick="openChatFromFloatingBtn()">
+    <div class="chat-icon">💬</div>
+    <div class="chat-notification-badge" id="chatNotification" style="display: none">3</div>
+</div>
+
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
