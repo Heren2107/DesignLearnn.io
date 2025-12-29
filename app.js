@@ -395,19 +395,49 @@ function submitQuiz(e, level) {
     
     const percentage = Math.round((score / level.quiz.length) * 100);
     const passed = percentage >= 70;
-    
-    alert(`Skor Anda: ${score}/${level.quiz.length} (${percentage}%)\n${passed ? '✅ Lulus! Silakan lanjut ke case study.' : '❌ Belum cukup. Coba lagi!'}`);
-    
+
+    const msg = `Skor Anda: ${score}/${level.quiz.length} (${percentage}%)\n${passed ? '✅ Lulus! Silakan lanjut ke case study.' : '❌ Belum cukup. Coba lagi!'}`;
+
+    // Show non-blocking toast (so we can auto-close/redirect without requiring user to click OK)
+    showToast(msg, 1800);
+
     if (passed) {
         // Mark quiz as completed
         saveProgress(currentCourseId, currentLevelNumber, 'quiz');
     }
+
+    // After a short delay, close the quiz view automatically:
+    setTimeout(() => {
+        if (passed) {
+            // Navigate directly to case study
+            startCaseStudy(currentLevelNumber);
+        } else {
+            // Go back to course detail so user doesn't have to scroll
+            showView('courseDetail');
+        }
+    }, 1000);
 }
 
 // ==================== CASE STUDY SYSTEM ====================
 function startCaseStudy(levelNumber) {
     currentLevelNumber = levelNumber;
     showView('caseStudy');
+}
+
+// Simple toast helper (non-blocking) — shows small message then removes itself
+function showToast(message, duration = 1800) {
+    const toast = document.createElement('div');
+    toast.className = 'app-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // trigger entrance animation
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
 }
 
 function renderCaseStudy() {
@@ -1972,12 +2002,35 @@ function sendChatMessageWidget() {
             replyText = `Ada contoh di Modul 3; saya bisa ringkas atau beri kutipan jika Anda mau.`;
         } else if (/(halo|hi|hai)/.test(lower)) {
             replyText = `Halo! Apa yang ingin Anda tanyakan tentang kursus ini?`;
+        } else if(/(terima kasih|makasih|thanks)/.test(lower)) {
+            replyText = `Sama-sama! Jangan ragu untuk bertanya lagi jika ada yang ingin Anda ketahui.`;
+        } else if(/(sedih|kecewa)/.test(lower)) {
+            replyText = `Maaf mendengar itu. Bisa beri tahu saya bagian mana yang membuat Anda kesulitan? Saya di sini untuk membantu!`;
+        } else if(/sayang|cinta/.test(lower)) {
+            replyText = `aku juga sayang sama kamu kok. ❤️`;
+        } else if(/(bug|error|masalah)/.test(lower)) {
+            replyText = `Maaf atas ketidaknyamanannya. Bisa jelaskan lebih detail tentang masalah yang Anda alami?`;
+        } else if(/(sulit|bingung|pusing)/.test(lower)) {
+            replyText = `Saya mengerti, beberapa konsep memang menantang. Bagian mana yang paling membingungkan bagi Anda?`;
+        } else if(/(bagus|hebat|mantap)/.test(lower)) {
+            replyText = `Terima kasih atas apresiasinya! Senang mendengar Anda menikmati kursus ini.`;
+        } else if(/(bantu|tolong)/.test(lower)) {
+            replyText = `Tentu! Silakan beri tahu saya apa yang bisa saya bantu terkait kursus ini.`;
+        } else if(/(review|ulasan)/.test(lower)) {
+            replyText = `Anda bisa melihat ulasan dari peserta lain di halaman kursus. Ada yang spesifik ingin Anda ketahui?`;
+        } else if(/(sertifikat|certificate)/.test(lower)) {
+            replyText = `Sertifikat akan diberikan setelah Anda menyelesaikan semua level dan tugas dalam kursus ini. Semangat ya!`;
+        } else if(/(kamu udah makan)/.test(lower)) {
+            replyText = `udah sayang 😘, kamu udah?`;
+        } else if(/(ngantuk|lelah)/.test(lower)) {
+            replyText = `jangan lupa istirahat yang cukup ya! kesehatan itu penting. 😊`;
         } else {
             const fallbacks = [
                 `Terima kasih! Saya akan melihat dan kembali secepatnya.`,
                 `Bisa kasih sedikit detail tambahan supaya saya bisa bantu lebih spesifik?`,
                 `Coba sebutkan kata kunci atau topik yang ingin dijelaskan.`,
                 `Mungkin materi di Level 2 atau 3 relevan; mau saya tunjukkan?`
+                `oke sayang, aku usahain bantu semampuku 😊`,
             ];
             replyText = fallbacks[Math.floor(Math.random() * fallbacks.length)];
         }
