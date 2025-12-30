@@ -398,6 +398,16 @@ body {
     overflow: hidden;
 }
 
+/* Video & Payment enhancements */
+.level-video .video-wrapper { position: relative; padding-top: 56.25%; /* 16:9 */ }
+.level-video iframe { position: absolute; inset:0; width:100%; height:100%; border:0; border-radius:8px; }
+.mark-watched-btn { margin-top: 0.5rem; }
+.watched-badge { color: var(--success-color); font-weight:700; margin-left:0.5rem; }
+.bank-list { display:flex; flex-direction:column; gap:0.5rem; margin:0.5rem 0; }
+.bank-list label { display:flex; gap:0.75rem; align-items:center; padding:0.5rem; border:1px solid var(--border-color); border-radius:8px; cursor:pointer; }
+.bank-list input { accent-color: var(--primary-color); }
+#selectedBankInfo { margin-top:0.75rem; padding:0.8rem; border:1px dashed var(--border-color); border-radius:8px; background:#fff; }
+
 .benefits::before {
     content: '';
     position: absolute;
@@ -529,6 +539,165 @@ body {
 .feature-card p {
     color: var(--light-text);
     line-height: 1.6;
+}
+
+/* ==================== TESTIMONIALS SECTION ==================== */
+.testimonials {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #fff 0%, #fbfbff 100%);
+}
+
+.testimonials .section-header h2 {
+    font-size: 1.9rem;
+    margin-bottom: 1rem;
+}
+
+.testimonials-wrapper {
+    position: relative;
+}
+
+.testimonials-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.4rem;
+    overflow-x: auto;
+    padding-bottom: 0.6rem; /* give space for scrollbar */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.testimonials-grid::after { content: ''; width: 1rem; flex: 0 0 1rem; }
+
+.testimonial-card {
+    min-width: 320px;
+    max-width: 360px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+
+.testimonial-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.testimonial-prev { left: -10px; }
+.testimonial-next { right: -10px; }
+
+.testimonial-arrow:hover { transform: translateY(-50%) translateX(0) scale(1.03); background: var(--light-bg); }
+
+/* Hide default scrollbar for modern browsers but keep it accessible */
+.testimonials-grid::-webkit-scrollbar { height: 8px; }
+.testimonials-grid::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 999px; }
+.testimonials-grid {-ms-overflow-style: -ms-autohiding-scrollbar; }
+
+@media (max-width: 600px) {
+    .testimonial-card { min-width: 260px; max-width: 86%; }
+    .testimonial-prev, .testimonial-next { display: none; }
+}
+
+/* ==================== Custom Animated Cursor ==================== */
+.custom-cursor-enabled { cursor: none; }
+
+.cursor,
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+}
+
+.cursor {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 6px 18px rgba(123, 47, 247, 0.14);
+    transition: transform 120ms ease, opacity 120ms linear;
+}
+
+.cursor-follower {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(123,47,247,0.12);
+    background: rgba(123,47,247,0.03);
+    transition: transform 220ms cubic-bezier(0.22,1,0.36,1), opacity 180ms linear;
+}
+
+.cursor.hovered { transform: translate(-50%, -50%) scale(0.9); background: transparent; }
+.cursor-follower.hovered { transform: translate(-50%, -50%) scale(1.15); border-color: var(--primary-color); background: rgba(123,47,247,0.06); }
+
+.cursor.pressed { transform: translate(-50%, -50%) scale(0.75); opacity: 0.9; }
+.cursor-follower.pressed { transform: translate(-50%, -50%) scale(0.95); opacity: 0.95; }
+
+/* Hide on touch / reduced motion */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .cursor, .cursor-follower, .custom-cursor-enabled { display: none !important; cursor: auto !important; }
+}  
+
+.testimonial-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.4rem 1.4rem 1.6rem 1.4rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-height: 160px;
+}
+
+.testimonial-header {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.testimonial-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+.testimonial-name {
+    color: var(--dark-text);
+    display: block;
+    font-weight: 700;
+}
+
+.testimonial-role {
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+.testimonial-quote {
+    margin-top: 0.2rem;
+    color: var(--light-text);
+    line-height: 1.7;
+    font-style: italic;
+}
+
+@media (min-width: 992px) {
+    .testimonials-grid { gap: 1.8rem; }
+    .testimonial-card { padding: 1.6rem; }
 }
 
 /* ==================== COURSES SECTION ==================== */
@@ -1184,12 +1353,62 @@ body {
     margin: 1.5rem auto;
 }
 
+.qris-code img,
 .qris-code svg {
     width: 100%;
     border: 2px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem;
     background: white;
+    display: block;
+}
+
+.qris-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+}
+
+.qris-actions .btn {
+    min-width: 110px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.copy-qris-btn {
+    border: 2px dashed var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+.copy-qris-btn:hover,
+.copy-qris-btn:focus {
+    background: rgba(123, 47, 247, 0.06);
+    transform: translateY(-2px);
+}
+
+.copy-qris-btn.copied {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    border-color: transparent;
+}
+
+.download-qris-btn {
+    padding: 0.45rem 0.9rem;
+}
+
+.qris-actions .btn-icon { font-size: 1rem; display: inline-block; }
+
+.copy-qris-btn[disabled] {
+    opacity: 0.85;
+    cursor: default;
 }
 
 .bank-info {
