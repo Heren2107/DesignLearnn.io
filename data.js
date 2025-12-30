@@ -30,6 +30,7 @@ const coursesData = [
         title: "Color Theory & Basic Principles",
         description: "Memahami dasar teori warna dan prinsip design visual",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/AvgCkHrcj90?si=cELmrO-CbPDRhDuA",
         quiz: [
           { question: "Apa yang dimaksud dengan color harmony?", options: ["Kombinasi warna yang serasi", "Perpaduan warna random", "Satu warna saja", "Warna pastel"], correct: 0 },
           { question: "RGB adalah model warna untuk apa?", options: ["Cetak (print)", "Digital (screen)", "Kombinasi keduanya", "Tidak ada"], correct: 1 },
@@ -59,6 +60,7 @@ const coursesData = [
         title: "Typography Mastery",
         description: "Menjadi ahli dalam pemilihan dan penggunaan tipografi",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/sByzHoiYFX0?si=exEaZHgZLTNdglex",
         quiz: [
           { question: "Perbedaan font serif dan sans-serif?", options: ["Ukuran berbeda", "Serif punya kail, sans-serif tidak", "Tidak ada perbedaan", "Serif untuk cetak, sans-serif digital"], correct: 1 },
           { question: "Apa itu kerning?", options: ["Ukuran font", "Jarak antar huruf", "Tebal font", "Jarak antar baris"], correct: 1 },
@@ -85,9 +87,10 @@ const coursesData = [
       },
       {
         levelNumber: 3,
-        title: "Composition & Layout",
+        title: "Layout & Composition Techniques",
         description: "Menguasai prinsip komposisi dan layout yang efektif",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/a5KYlHNKQB8?si=0uSCT4ldMFDMQ9U6",
         quiz: [
           { question: "Rule of thirds adalah prinsip komposisi yang membagi?", options: ["2 bagian", "3 bagian", "4 bagian", "9 bagian"], correct: 3 },
           { question: "Golden ratio dalam design bernilai berapa?", options: ["1.414", "1.618", "2.718", "3.142"], correct: 1 },
@@ -114,9 +117,10 @@ const coursesData = [
       },
       {
         levelNumber: 4,
-        title: "Visual Communication",
+        title: "Visual Communication design",
         description: "Komunikasi visual yang efektif dan persuasif",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/_TudzupRuCs?si=ee5S9i3cacAOXxyE",
         quiz: [
           { question: "Apa itu semiotics dalam design?", options: ["Seni menggambar", "Ilmu tanda dan makna", "Kombinasi warna", "Pemilihan font"], correct: 1 },
           { question: "Icon design paling efektif ketika?", options: ["Indah", "Mudah dipahami dan recognizable", "Unik", "Kompleks"], correct: 1 },
@@ -146,6 +150,7 @@ const coursesData = [
         title: "Advanced Design Projects",
         description: "Proyek design profesional tingkat lanjut dengan kompleksitas tinggi",
         duration: "4 minggu",
+        videoUrl: "https://youtu.be/YzSooKa1PwM?si=c_ZOiTZNG1JorX62",
         quiz: [
           { question: "Design thinking process dimulai dengan?", options: ["Prototyping", "Empathize & understand user", "Implementation", "Testing"], correct: 1 },
           { question: "Apa itu iterative design?", options: ["Design sekali", "Proses perbaikan berulang berdasarkan feedback", "Design cepat", "Design tanpa planning"], correct: 1 },
@@ -203,6 +208,7 @@ const coursesData = [
         title: "UX Research Fundamentals",
         description: "Dasar-dasar UX research dan user understanding",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/kQ_6faxhyIw?si=VUmz6feNZbhA1eAc",
         quiz: [
           { question: "UX research bertujuan untuk?", options: ["Membuat design indah", "Memahami user needs & behaviors", "Menghemat biaya", "Trend saja"], correct: 1 },
           { question: "Qualitative research adalah?", options: ["Data angka", "Data deskriptif & insights mendalam", "Statistik", "Hanya survey"], correct: 1 },
@@ -232,6 +238,7 @@ const coursesData = [
         title: "Information Architecture & Wireframing",
         description: "Struktur informasi dan low-fidelity prototyping",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/OJLfjgVlwDo?si=zahT_6Q9KEsvKioX",
         quiz: [
           { question: "Information Architecture adalah?", options: ["Design indah", "Struktur organisasi informasi & navigasi", "Database", "Dekorasi"], correct: 1 },
           { question: "Wireframe adalah?", options: ["Desain final dengan warna", "Sketsa struktur & layout tanpa visual style", "Prototype interaktif", "Kode"], correct: 1 },
@@ -261,6 +268,7 @@ const coursesData = [
         title: "High-Fidelity Design & Visual Design",
         description: "Desain visual berkualitas tinggi dan interactive mockup",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/Fr-f2NE6B3U?si=GhLJkjkyMEYPVK7H",
         quiz: [
           { question: "High-fidelity mockup adalah?", options: ["Wireframe", "Design visual lengkap mendekati produk final", "Sketch", "Concept"], correct: 1 },
           { question: "Design system components berguna untuk?", options: ["Dekorasi", "Konsistensi & reusability across products", "Marketing", "Portfolio saja"], correct: 1 },
@@ -290,6 +298,7 @@ const coursesData = [
         title: "Advanced Prototyping & Interaction",
         description: "Prototyping interaktif dan advanced animation",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/o3r1CBEFYX4?si=L7JBoW_axoG2t3e9",
         quiz: [
           { question: "Prototyping tools modern yang populer?", options: ["Hanya Sketch", "Figma, Framer, Adobe XD, etc", "Hanya PowerPoint", "Tidak ada"], correct: 1 },
           { question: "Interaction design adalah?", options: ["Hanya button", "Merancang bagaimana user berinteraksi dengan produk", "Visual design", "Koding"], correct: 1 },
@@ -319,6 +328,7 @@ const coursesData = [
         title: "Product Design & UX Strategy",
         description: "Strategi produk dan design thinking di level enterprise",
         duration: "4 minggu",
+        videoUrl: "https://youtu.be/9Z5ARtTPtxo?si=HgYQUIbpcpici9W5",
         quiz: [
           { question: "Product strategy adalah?", options: ["Hanya marketing", "Long-term plan yang align design, business, & user", "Tidak penting", "Creative saja"], correct: 1 },
           { question: "User-centered design adalah?", options: ["Hanya riset", "Menempatkan user needs di center dari design process", "Designer job", "Tidak relevan"], correct: 1 },
@@ -378,6 +388,7 @@ const coursesData = [
         title: "Responsive Design Foundation",
         description: "Dasar responsive design dan mobile-first thinking",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/q9nBRJo_Iss?si=kjgL0tw83z5Jq9SI",
         quiz: [
           { question: "Responsive design adalah?", options: ["Hanya desktop", "Design yang adapt ke berbagai screen size", "Hanya mobile", "Tidak ada"], correct: 1 },
           { question: "Mobile-first approach berarti?", options: ["Hanya mobile", "Design mobile dulu, kemudian scale up", "Mobile terakhir", "Tidak perlu"], correct: 1 },
@@ -408,6 +419,7 @@ const coursesData = [
         title: "Modern Web Design & UX",
         description: "Tren modern dan UX best practices untuk web",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/web_ux_l2",
         quiz: [
           { question: "Minimalism dalam web design adalah?", options: ["Kosong", "Fokus essential elements, eliminate clutter", "Tidak indah", "Trend saja"], correct: 1 },
           { question: "Neumorphism dalam design adalah?", options: ["Platform baru", "Blend skeuomorphism & flat design", "Tidak ada", "Hanya app"], correct: 1 },
@@ -438,6 +450,7 @@ const coursesData = [
         title: "E-commerce & Conversion Design",
         description: "Design untuk e-commerce dan optimization conversion",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/web_ecom_l3",
         quiz: [
           { question: "E-commerce design principle utama adalah?", options: ["Terlihat mewah", "Easy browsing, smooth checkout, trust building", "Hanya indah", "Mobile saja"], correct: 1 },
           { question: "Product page layout penting element?", options: ["Hanya foto", "Image, description, price, review, CTA", "Tidak penting", "Text saja"], correct: 1 },
@@ -468,6 +481,7 @@ const coursesData = [
         title: "Web Animation & Interaction",
         description: "Animation dan interaction design untuk web",
         duration: "2 minggu",
+        videoUrl: "https://youtu.be/web_anim_l4",
         quiz: [
           { question: "Web animation berguna untuk?", options: ["Hanya indah", "Engagement, feedback, visual continuity", "Membuat lambat", "Tidak perlu"], correct: 1 },
           { question: "CSS animation vs JavaScript animation?", options: ["Sama", "CSS efficient, JS flexible", "Hanya CSS", "Hanya JavaScript"], correct: 1 },
@@ -498,6 +512,7 @@ const coursesData = [
         title: "Web Performance & Advanced Topics",
         description: "Web performance, SEO, dan advanced web technologies",
         duration: "4 minggu",
+        videoUrl: "https://youtu.be/web_perf_l5",
         quiz: [
           { question: "Web vitals penting untuk?", options: ["Hanya programmer", "User experience & SEO ranking", "Design tidak perlu", "Random"], correct: 1 },
           { question: "Largest Contentful Paint (LCP) ideal berapa?", options: ["5s", "2.5s atau kurang", "Tidak penting", "Bebas"], correct: 1 },
@@ -527,5 +542,37 @@ const coursesData = [
     ]
   }
   
+];
+
+// Sample testimonials to display on the homepage
+const testimonialsData = [
+  {
+    name: "Abigail P.",
+    role: "Desainer Grafis",
+    quote: "Saya memiliki pekerjaan penuh waktu dan tiga anak. Saya membutuhkan fleksibilitas yang ditawarkan platform untuk mencapai tujuan belajar saya. Langganan dan materi terstruktur membuat saya terus termotivasi.",
+    avatar: "https://i.pravatar.cc/100?img=47",
+    location: "Jakarta"
+  },
+  {
+    name: "Shi Jie F.",
+    role: "Product Manager",
+    quote: "Platform ini membuat saya tetap termotivasi untuk belajar. Dengan setiap kursus, saya mendapatkan nilai lebih dari langganan saya dan bisa mengakses banyak materi berkualitas.",
+    avatar: "https://i.pravatar.cc/100?img=12",
+    location: "Bandung"
+  },
+  {
+    name: "Inés K.",
+    role: "Freelancer",
+    quote: "Saya sangat menghargai fleksibilitas yang saya dapatkan. Saya bisa mencoba berbagai kursus dan berpindah antar materi tanpa biaya tambahan — ini memotivasi saya untuk belajar lebih banyak lagi!",
+    avatar: "https://i.pravatar.cc/100?img=33",
+    location: "Yogyakarta"
+  },
+  {
+    name: "Liam S.",
+    role: "Web Developer",
+    quote: "Kursus-kursus di platform ini sangat membantu saya dalam mengembangkan keterampilan desain web saya. Materi yang disediakan sangat relevan dengan kebutuhan industri saat ini.",
+    avatar: "https://i.pravatar.cc/100?img=56",
+    location: "Surabaya"
+  }
 ];
 
