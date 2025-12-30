@@ -15,6 +15,9 @@ function initializeApp() {
     enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || {};
     updateAuthUI();
     renderCoursesGrid();
+    renderTestimonials();
+    initTestimonialsScroll();
+    initCustomCursor();
     clearAuthErrors();
     
     // Navigation listeners
@@ -178,6 +181,141 @@ function renderCoursesGrid() {
     });
 }
 
+function renderTestimonials() {
+    const grid = document.getElementById('testimonialsGrid');
+    if (!grid) return;
+    grid.innerHTML = testimonialsData.map(t => `
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar" />
+                <div class="testimonial-meta">
+                    <strong class="testimonial-name">${t.name}</strong>
+                    ${t.role ? `<div class="testimonial-role">${t.role}</div>` : ''}
+                </div>
+            </div>
+            <p class="testimonial-quote">“${t.quote}”</p>
+        </div>
+    `).join('');
+}
+
+function initTestimonialsScroll() {
+    const wrapper = document.querySelector('.testimonials-wrapper');
+    const grid = document.getElementById('testimonialsGrid');
+    if (!grid || !wrapper) return;
+
+    const prevBtn = wrapper.querySelector('.testimonial-prev');
+    const nextBtn = wrapper.querySelector('.testimonial-next');
+
+    const scrollByAmount = () => Math.round(grid.clientWidth * 0.7);
+
+    prevBtn?.addEventListener('click', () => {
+        grid.scrollBy({ left: -scrollByAmount(), behavior: 'smooth' });
+    });
+    nextBtn?.addEventListener('click', () => {
+        grid.scrollBy({ left: scrollByAmount(), behavior: 'smooth' });
+    });
+
+    // Mouse / touch drag to scroll
+    let isDown = false, startX, scrollLeft;
+    grid.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        grid.setPointerCapture(e.pointerId);
+        startX = e.clientX;
+        scrollLeft = grid.scrollLeft;
+        grid.classList.add('dragging');
+    });
+    grid.addEventListener('pointerup', (e) => {
+        isDown = false;
+        try { grid.releasePointerCapture(e.pointerId); } catch (err) {}
+        grid.classList.remove('dragging');
+    });
+    grid.addEventListener('pointerleave', () => {
+        isDown = false; grid.classList.remove('dragging');
+    });
+    grid.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        const x = e.clientX;
+        const walk = (startX - x);
+        grid.scrollLeft = scrollLeft + walk;
+    });
+
+    // Wheel scroll horizontal
+    grid.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+            e.preventDefault();
+            grid.scrollBy({ left: e.deltaY, behavior: 'auto' });
+        }
+    }, { passive: false });
+
+    // Hide arrows when not scrollable
+    const updateArrows = () => {
+        const maxScroll = grid.scrollWidth - grid.clientWidth;
+        if (prevBtn) prevBtn.style.display = grid.scrollLeft > 8 ? 'inline-flex' : 'inline-flex';
+        if (nextBtn) nextBtn.style.display = grid.scrollLeft < maxScroll - 8 ? 'inline-flex' : 'inline-flex';
+    };
+    grid.addEventListener('scroll', () => updateArrows());
+    window.addEventListener('resize', updateArrows);
+    setTimeout(updateArrows, 200);
+}
+
+function initCustomCursor() {
+    const cursor = document.getElementById('customCursor');
+    const follower = document.getElementById('cursorFollower');
+    if (!cursor || !follower) return;
+
+    // Respect user preferences and touch devices
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+    if (prefersReduced || isCoarse) {
+        cursor.style.display = 'none';
+        follower.style.display = 'none';
+        return;
+    }
+
+    document.documentElement.classList.add('custom-cursor-enabled');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let fx = mouseX;
+    let fy = mouseY;
+
+    const lerp = (a, b, n) => a + (b - a) * n;
+
+    // Immediate small position update for the sharp dot
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    // Trailing follower animation
+    function animate() {
+        fx = lerp(fx, mouseX, 0.18);
+        fy = lerp(fy, mouseY, 0.18);
+        follower.style.transform = `translate(${fx}px, ${fy}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Hover interactions for interactive elements
+    const interactiveSelector = 'a, button, .btn, input, textarea, select, label';
+    document.querySelectorAll(interactiveSelector).forEach(el => {
+        el.addEventListener('mouseenter', () => { cursor.classList.add('hovered'); follower.classList.add('hovered'); });
+        el.addEventListener('mouseleave', () => { cursor.classList.remove('hovered'); follower.classList.remove('hovered'); });
+    });
+
+    // Press interactions
+    document.addEventListener('mousedown', () => { cursor.classList.add('pressed'); follower.classList.add('pressed'); });
+    document.addEventListener('mouseup', () => { cursor.classList.remove('pressed'); follower.classList.remove('pressed'); });
+
+    // Keyboard focus accessibility
+    document.addEventListener('focusin', (e) => { if (e.target && e.target.matches && e.target.matches(interactiveSelector)) { cursor.classList.add('hovered'); follower.classList.add('hovered'); } });
+    document.addEventListener('focusout', (e) => { if (e.target && e.target.matches && e.target.matches(interactiveSelector)) { cursor.classList.remove('hovered'); follower.classList.remove('hovered'); } });
+
+    // Hide cursor on touchstart to be safe
+    window.addEventListener('touchstart', () => { cursor.style.display = 'none'; follower.style.display = 'none'; document.documentElement.classList.remove('custom-cursor-enabled'); }, { once: true });
+}
+
 // ==================== COURSE DETAIL ====================
 function openCourseDetail(courseId) {
     currentCourseId = courseId;
@@ -250,11 +388,22 @@ function renderCourseDetail() {
                         </div>
                         <p class="level-description">${level.description}</p>
                         ${isEnrolled ? `
+                            ${level.videoUrl ? `
+                                <div class="level-video">
+                                    <h4>Video Pengantar</h4>
+                                    <div class="video-wrapper">
+                                        <iframe src="${getYouTubeEmbedUrl(level.videoUrl)}" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="video-actions">
+                                        ${hasWatchedVideo(currentCourseId, level.levelNumber) ? `<span class="watched-badge">✅ Sudah ditonton</span>` : `<button class="btn btn-outline mark-watched-btn" data-level="${level.levelNumber}">Tandai sudah menonton</button>`}
+                                    </div>
+                                </div>
+                            ` : ''}
                             <div class="level-actions">
-                                <button class="btn btn-secondary quiz-btn" data-level="${level.levelNumber}">
+                                <button class="btn btn-secondary quiz-btn" data-level="${level.levelNumber}" ${level.videoUrl && !hasWatchedVideo(currentCourseId, level.levelNumber) ? 'disabled' : ''}>
                                     Quiz Level ${level.levelNumber} (10 soal)
                                 </button>
-                                <button class="btn btn-secondary case-study-btn" data-level="${level.levelNumber}">
+                                <button class="btn btn-secondary case-study-btn" data-level="${level.levelNumber}" ${level.videoUrl && !hasWatchedVideo(currentCourseId, level.levelNumber) ? 'disabled' : ''}>
                                     Case Study Level ${level.levelNumber}
                                 </button>
                             </div>
@@ -316,17 +465,34 @@ function renderCourseDetail() {
         enrollBtn.addEventListener('click', enrollCourse);
     }
     
-    // Add listeners untuk quiz buttons
+    // Quiz listeners
     content.querySelectorAll('.quiz-btn').forEach(btn => {
         btn.addEventListener('click', () => {
+            if (btn.disabled) {
+                alert('Silakan tonton video pengantar level ini terlebih dahulu.');
+                return;
+            }
             startQuiz(parseInt(btn.getAttribute('data-level')));
         });
     });
     
-    // Add listeners untuk case study buttons
+    // Case study listeners
     content.querySelectorAll('.case-study-btn').forEach(btn => {
         btn.addEventListener('click', () => {
+            if (btn.disabled) {
+                alert('Silakan tonton video pengantar level ini terlebih dahulu.');
+                return;
+            }
             startCaseStudy(parseInt(btn.getAttribute('data-level')));
+        });
+    });
+
+    // Mark-watched buttons for videos
+    content.querySelectorAll('.mark-watched-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lvl = parseInt(btn.getAttribute('data-level'));
+            markVideoWatched(currentCourseId, lvl);
+            renderCourseDetail();
         });
     });
 
@@ -566,10 +732,48 @@ function showQRIS() {
     document.getElementById('qrisContent').style.display = 'block';
     document.getElementById('bankContent').style.display = 'none';
     if (pendingCourseForPayment) {
-        document.getElementById('qrisPrice').textContent = 
-            'Total: Rp ' + pendingCourseForPayment.price.toLocaleString('id-ID');
+        const amount = pendingCourseForPayment.price;
+        document.getElementById('qrisPrice').textContent = 'Total: Rp ' + amount.toLocaleString('id-ID');
+        // For demo: generate a simple payment URL that will be encoded into the QR
+        const payUrl = `https://designlearn.example/pay?courseId=${encodeURIComponent(pendingCourseForPayment.id)}&amount=${encodeURIComponent(amount)}`;
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(payUrl)}`;
+        const img = document.getElementById('qrisImage');
+        if (img) {
+            img.src = qrUrl;
+            img.alt = `QRIS - Scan untuk membayar Rp ${amount.toLocaleString('id-ID')}`;
+            img.dataset.qrUrl = qrUrl;
+        }
+        const downloadLink = document.getElementById('downloadQris');
+        if (downloadLink) downloadLink.href = qrUrl;
     }
 }
+
+function copyQRCodeUrl() {
+    const img = document.getElementById('qrisImage');
+    const url = img?.dataset?.qrUrl;
+    if (!url) {
+        alert('QR belum tersedia. Silakan buka QRIS terlebih dahulu.');
+        return;
+    }
+    navigator.clipboard?.writeText(url).then(() => {
+        const btn = document.getElementById('copyQrisBtn');
+        if (btn) {
+            const labelEl = btn.querySelector('.btn-text');
+            const original = labelEl ? labelEl.textContent : btn.textContent;
+            if (labelEl) labelEl.textContent = 'Tersalin!'; else btn.textContent = 'Tersalin!';
+            btn.classList.add('copied');
+            btn.disabled = true;
+            setTimeout(() => {
+                if (labelEl) labelEl.textContent = original; else btn.textContent = original;
+                btn.classList.remove('copied');
+                btn.disabled = false;
+            }, 1500);
+        }
+        showToast('URL QR disalin ke clipboard');
+    }).catch(() => {
+        alert('Gagal menyalin URL. Silakan salin secara manual: ' + url);
+    });
+}  
 
 function showBankTransfer() {
     document.getElementById('qrisContent').style.display = 'none';
@@ -578,6 +782,11 @@ function showBankTransfer() {
         document.getElementById('transferAmount').textContent = 
             'Total: Rp ' + pendingCourseForPayment.price.toLocaleString('id-ID');
     }
+    // initialize bank info and listeners
+    updateSelectedBankInfo();
+    document.querySelectorAll('input[name="bankOption"]').forEach(i => {
+        i.addEventListener('change', updateSelectedBankInfo);
+    });
 }
 
 function completePayment(method) {
@@ -590,12 +799,77 @@ function completePayment(method) {
     if (!enrolledCourses[currentUser.email].includes(pendingCourseForPayment.id)) {
         enrolledCourses[currentUser.email].push(pendingCourseForPayment.id);
     }
+
+    // Determine more detailed method description for feedback
+    let methodDetail = method;
+    if (method === 'BANK') {
+        const bank = getSelectedBank();
+        if (bank) {
+            methodDetail = `Transfer Bank (${bank.name} - ${bank.account})`;
+        }
+    }
     
     localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
     
-    alert(`✅ Pembayaran berhasil melalui ${method}!\nAnda sekarang dapat mengakses semua materi kursus.`);
+    alert(`✅ Pembayaran berhasil melalui ${methodDetail}!\nAnda sekarang dapat mengakses semua materi kursus.`);
     closePaymentModal();
     renderCourseDetail();
+}
+
+// --- Bank & Video helpers ---
+function getSelectedBank() {
+    const selected = document.querySelector('input[name="bankOption"]:checked');
+    if (!selected) return null;
+    return {
+        name: selected.value,
+        account: selected.dataset.account,
+        owner: selected.dataset.name
+    };
+}
+
+function updateSelectedBankInfo() {
+    const info = document.getElementById('selectedBankInfo');
+    const bank = getSelectedBank();
+    if (!info || !bank) return;
+    info.innerHTML = `
+        <p><strong>Bank:</strong> ${bank.name}</p>
+        <p><strong>Nomor Rekening:</strong> ${bank.account}</p>
+        <p><strong>Atas Nama:</strong> ${bank.owner}</p>
+        <div style="margin-top:0.5rem"><button class="btn btn-secondary" onclick="navigator.clipboard?.writeText('${bank.account}') || alert('Salin: ${bank.account}')">Salin Nomor Rekening</button></div>
+    `;
+}
+
+// --- Video watch tracking helpers ---
+function getWatchedKey() {
+    return currentUser ? `watched_${currentUser.email}` : 'watched_guest';
+}
+
+function hasWatchedVideo(courseId, levelNumber) {
+    try {
+        const store = JSON.parse(localStorage.getItem(getWatchedKey())) || {};
+        return !!store[`${courseId}_${levelNumber}`];
+    } catch (e) { return false; }
+}
+
+function markVideoWatched(courseId, levelNumber) {
+    try {
+        const key = getWatchedKey();
+        const store = JSON.parse(localStorage.getItem(key)) || {};
+        store[`${courseId}_${levelNumber}`] = true;
+        localStorage.setItem(key, JSON.stringify(store));
+    } catch (e) { console.error(e); }
+}
+
+function getYouTubeEmbedUrl(url) {
+    try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtu.be')) {
+            const id = u.pathname.slice(1);
+            return `https://www.youtube.com/embed/${id}`;
+        } else {
+            return `https://www.youtube.com/embed/${u.searchParams.get('v')}`;
+        }
+    } catch (e) { return url; }
 }
 
 // ==================== AUTH SYSTEM ====================
@@ -1744,7 +2018,7 @@ function handleDropdownAction(action) {
 }
 
 function showContactInfo() {
-    const message = '📧 Email: farhan.dev@email.com\n💼 LinkedIn: linkedin.com/in/farhanmauludin\n𝕏 Twitter: twitter.com/farhandev\n⚙️ GitHub: github.com/farhanmauludin';
+    const message = '📧 Email: hardiansyahtd@email.com\n💼 LinkedIn: linkedin.com/in/hardiansyahtridharma\n⚙️ GitHub: github.com/heren2107';
     alert(message);
 }
 
