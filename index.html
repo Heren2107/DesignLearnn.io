@@ -195,6 +195,21 @@
                     </div>
                 </div>
             </section>
+
+            <section class="testimonials">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Apa yang dicapai pelanggan melalui pembelajaran</h2>
+                        <div class="decorative-line"></div>
+                    </div>
+
+                    <div class="testimonials-wrapper">
+                        <button class="testimonial-arrow testimonial-prev" aria-label="Sebelumnya">◀</button>
+                        <div id="testimonialsGrid" class="testimonials-grid" aria-live="polite"></div>
+                        <button class="testimonial-arrow testimonial-next" aria-label="Selanjutnya">▶</button>
+                    </div> 
+                </div>
+            </section>
         </div>
 
         <!-- Courses List View -->
@@ -253,16 +268,13 @@
                         <p><strong>👤 Nama Pembuat:</strong> <span id="creatorName">Hardiansyah Tri Dharma</span></p>
                         <p><strong>📧 Email:</strong> <a href="mailto:hardiansyahtd@gmail.com">hardiansyahtd@gmail.com</a></p>
                         <div class="social-links">
-                            <a href="https://linkedin.com/in/farhanmauludin" target="_blank" title="LinkedIn">
+                            <a href="https://www.linkedin.com/in/hardiansyah-tri-dharma-a757252a8/" target="_blank" title="LinkedIn">
                                 <span class="social-icon">💼 LinkedIn</span>
                             </a>
-                            <a href="https://twitter.com/farhandev" target="_blank" title="Twitter">
-                                <span class="social-icon">𝕏 Twitter</span>
-                            </a>
-                            <a href="https://github.com/farhanmauludin" target="_blank" title="GitHub">
+                            <a href="https://github.com/Heren2107" target="_blank" title="GitHub">
                                 <span class="social-icon">⚙️ GitHub</span>
                             </a>
-                            <a href="https://instagram.com/farhan.design" target="_blank" title="Instagram">
+                            <a href="https://www.instagram.com/radioheadholicc/" target="_blank" title="Instagram">
                                 <span class="social-icon">📷 Instagram</span>
                             </a>
                         </div>
@@ -274,7 +286,7 @@
                         <li><a href="#" onclick="showView('home')">Beranda</a></li>
                         <li><a href="#" onclick="showView('courses')">Kursus</a></li>
                         <li><a href="#" onclick="showView('dashboard')">Dashboard</a></li>
-                        <li><a href="#" onclick="alert('Hubungi kami di farhan.dev@email.com')">Hubungi Kami</a></li>
+                        <li><a href="#" onclick="alert('Hubungi kami di hardiansyahtd@gmail.com')">Hubungi Kami</a></li>
                     </ul>
                 </div>
             </div>
@@ -305,26 +317,35 @@
             <div id="qrisContent" style="display:none;" class="payment-details">
                 <h3>Bayar dengan QRIS</h3>
                 <div class="qris-code">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="200" height="200" fill="white"/>
-                        <rect x="10" y="10" width="40" height="40" fill="black"/>
-                        <rect x="150" y="10" width="40" height="40" fill="black"/>
-                        <rect x="10" y="150" width="40" height="40" fill="black"/>
-                        <rect x="60" y="60" width="80" height="80" fill="black" opacity="0.3"/>
-                    </svg>
+                    <img id="qrisImage" src="" alt="QRIS Code" width="220" height="220" />
+                    <div class="qris-actions" role="group" aria-label="Aksi QRIS">
+                        <button id="copyQrisBtn" class="btn btn-outline copy-qris-btn" onclick="copyQRCodeUrl()" aria-label="Salin kode QR" title="Salin kode QR">
+                            <span class="btn-icon">📋</span>
+                            <span class="btn-text">Salin Kode QR</span>
+                        </button>
+                        <a id="downloadQris" class="btn btn-secondary download-qris-btn" download="qris.png" aria-label="Unduh QR">
+                            <span class="btn-icon">⬇️</span>
+                            <span class="btn-text">Unduh</span>
+                        </a>
+                    </div>
                 </div>
                 <p id="qrisPrice" style="margin: 1rem 0; font-weight: bold;"></p>
+                <p><em>Petunjuk: buka aplikasi pembayaran Anda lalu pilih "Scan QR" dan arahkan ke QR ini.</em></p>
                 <button class="btn btn-primary" onclick="completePayment('QRIS')">Konfirmasi Pembayaran</button>
             </div>
             <div id="bankContent" style="display:none;" class="payment-details">
-                <h3>Informasi Rekening</h3>
-                <div class="bank-info">
-                    <p><strong>Bank:</strong> BCA</p>
-                    <p><strong>Nomor Rekening:</strong> 1234567890</p>
-                    <p><strong>Atas Nama:</strong> PT Design Learn Indonesia</p>
-                    <p id="transferAmount" style="margin-top: 1rem; font-weight: bold;"></p>
+                <h3>Transfer Bank</h3>
+                <p id="transferAmount" style="margin-top: 0.5rem; font-weight: bold;"></p>
+                <div class="bank-list">
+                    <label><input type="radio" name="bankOption" value="BCA" data-account="1234567890" data-name="PT Design Learn Indonesia" checked> BCA - 1234567890</label>
+                    <label><input type="radio" name="bankOption" value="BNI" data-account="0987654321" data-name="PT Design Learn Indonesia"> BNI - 0987654321</label>
+                    <label><input type="radio" name="bankOption" value="Mandiri" data-account="1122334455" data-name="PT Design Learn Indonesia"> Mandiri - 1122334455</label>
+                    <label><input type="radio" name="bankOption" value="BRI" data-account="5566778899" data-name="PT Design Learn Indonesia"> BRI - 5566778899</label>
                 </div>
-                <button class="btn btn-primary" onclick="completePayment('BANK')">Konfirmasi Pembayaran</button>
+                <div id="selectedBankInfo"></div>
+                <div style="margin-top:0.8rem">
+                    <button class="btn btn-primary" onclick="{ updateSelectedBankInfo(); completePayment('BANK'); }">Konfirmasi Pembayaran</button>
+                </div>
             </div>
         </div>
     </div>
@@ -385,6 +406,9 @@
     <div class="chat-notification-badge" id="chatNotification" style="display: none">3</div>
 </div>
 
+<!-- Custom animated cursor (dot + trailing ring) -->
+<div id="cursorFollower" class="cursor-follower" aria-hidden="true"></div>
+<div id="customCursor" class="cursor" aria-hidden="true"></div>
 
     <script src="data.js"></script>
     <script src="app.js"></script>
