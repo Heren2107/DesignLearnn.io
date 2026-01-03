@@ -540,6 +540,140 @@ const coursesData = [
         }
       }
     ]
+  },
+  {
+    id: 4,
+    title: "Photoshop Fundamentals for Beginners",
+    category: "Photo Editing",
+    level: "Pemula",
+    price: 399000,
+    rating: 4.78,
+    reviews: 131,
+    image: "https://images.unsplash.com/photo-1620674156044-52b714665d46?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    description: "Pelajari dasar-dasar Photoshop untuk mengedit foto dan membuat desain visual profesional melalui teknik yang mudah dipahami dan aplikatif bagi pemula.",
+    instructor: {
+      name: "Ardi Afriansyah",
+      role: "Photographer & Editor",
+      bio: "Profesional di bidang fotografi dan digital imaging dengan pengalaman dalam photo editing, retouching, dan visual composition untuk kebutuhan komersial dan kreatif.",
+      image: "ardi.jpg"
+    },
+    whatYouLearn: [
+  "Understand the basic tools and interface of Adobe Photoshop",
+  "Edit and enhance photos using essential techniques",
+  "Work with layers, masks, and adjustments effectively",
+  "Apply basic color correction and color grading",
+  "Create visual designs for digital and social media use",
+  "Optimize images for web and digital platforms"
+    ],
+    levels: [
+      {
+        levelNumber: 1,
+      title: "Photoshop Basics & Interface",
+      description: "Mengenal antarmuka Photoshop, tools dasar, dan workflow editing yang benar.",
+      duration: "2 minggu",
+      videoUrl: "https://youtu.be/p-cZHBouACs?si=3wfJpoL15z1CyKhx",
+      quiz: [
+        { question: "Adobe Photoshop digunakan untuk?", options: ["Editing foto", "Coding", "Spreadsheet", "Video editing"], correct: 0 },
+        { question: "Tool untuk memilih area tertentu adalah?", options: ["Move Tool", "Lasso Tool", "Brush Tool", "Crop Tool"], correct: 1 },
+        { question: "Fungsi layer dalam Photoshop adalah?", options: ["Menggabungkan semua objek", "Mengatur elemen secara terpisah", "Menghapus gambar", "Menambah warna"], correct: 1 },
+        { question: "Shortcut undo di Photoshop adalah?", options: ["Ctrl + Z", "Ctrl + C", "Ctrl + X", "Ctrl + V"], correct: 0 },
+        { question: "Resolution mempengaruhi?", options: ["Ukuran file saja", "Kualitas gambar", "Warna", "Format file"], correct: 1 }
+      ],
+      caseStudy: {
+        title: "Basic Photo Editing Workflow",
+        description: "Melakukan editing dasar foto mulai dari crop, exposure, hingga export final.",
+        requirements: [
+          "Import foto ke Photoshop",
+          "Crop dan straighten gambar",
+          "Adjust brightness, contrast, dan color",
+          "Export untuk kebutuhan digital"
+        ]
+      }
+    },
+      {
+        levelNumber: 2,
+      title: "Photo Retouching & Color Correction",
+      description: "Teknik retouching profesional dan pengaturan warna untuk hasil yang natural.",
+      duration: "2 minggu",
+      videoUrl: "https://youtu.be/ADDgUWgUCcI?si=OuCJ2FS7Ci11RvDM",
+      quiz: [
+        { question: "Tool utama untuk retouch wajah adalah?", options: ["Move Tool", "Healing Brush", "Crop Tool", "Pen Tool"], correct: 1 },
+        { question: "Dodge & Burn digunakan untuk?", options: ["Memotong gambar", "Mengatur terang dan gelap", "Mengubah warna", "Resize"], correct: 1 },
+        { question: "Color grading bertujuan untuk?", options: ["Menghapus noise", "Menciptakan mood visual", "Resize gambar", "Compress file"], correct: 1 }
+      ],
+      caseStudy: {
+        title: "Professional Portrait Retouching",
+        description: "Melakukan retouch wajah secara natural tanpa merusak tekstur kulit.",
+        requirements: [
+          "Skin retouching non-destruktif",
+          "Color correction & tone adjustment",
+          "Final export untuk kebutuhan profesional"
+        ]
+      }
+    },
+
+    {
+      levelNumber: 3,
+      title: "Photo Manipulation & Creative Design",
+      description: "Menggabungkan beberapa gambar untuk menciptakan visual kreatif.",
+      duration: "2 minggu",
+      videoUrl: "https://youtu.be/JEcG1-tsJ4M?si=kWWt-z5sJ450Ng0D",
+      quiz: [
+        { question: "Mask digunakan untuk?", options: ["Menghapus permanen", "Mengatur visibilitas layer", "Resize gambar", "Crop"], correct: 1 },
+        { question: "Blend mode berfungsi untuk?", options: ["Mengatur interaksi layer", "Menghapus warna", "Crop", "Resize"], correct: 0 }
+      ],
+      caseStudy: {
+        title: "Creative Photo Manipulation",
+        description: "Membuat karya visual kreatif dari beberapa gambar berbeda.",
+        requirements: [
+          "Combine multiple images",
+          "Apply lighting & shadow consistency",
+          "Color grading for cinematic look"
+        ]
+      }
+    },
+    {
+      levelNumber: 4,
+      title: "Design for Social Media & Branding",
+      description: "Mendesain konten visual untuk kebutuhan sosial media dan branding.",
+      duration: "2 minggu",
+      videoUrl: "https://youtu.be/GuMlpTEMKro?si=0eNisQrX_fDcXHVI",
+      quiz: [
+        { question: "Ukuran standar Instagram post?", options: ["1080x1080", "1920x1080", "800x600", "4K"], correct: 0 },
+        { question: "Brand consistency berarti?", options: ["Visual konsisten", "Ganti style terus", "Random design", "Ikuti trend saja"], correct: 0 }
+      ],
+      caseStudy: {
+        title: "Social Media Content Design",
+        description: "Membuat konten visual konsisten untuk kebutuhan branding.",
+        requirements: [
+          "Design feed Instagram",
+          "Apply brand color & typography",
+          "Optimize visual for engagement"
+        ]
+      }
+    },
+
+    {
+      levelNumber: 5,
+      title: "Professional Workflow & Exporting",
+      description: "Workflow profesional dan teknik export untuk berbagai kebutuhan.",
+      duration: "2 minggu",
+      videoUrl: "https://youtu.be/u1aMtiQxbVo?si=rAbhOPqFKtMV9mSO",
+      quiz: [
+        { question: "Format terbaik untuk web?", options: ["PSD", "JPG/PNG/WebP", "TIFF", "RAW"], correct: 1 },
+        { question: "Smart Object berguna untuk?", options: ["Edit non-destruktif", "Crop", "Resize", "Export"], correct: 0 }
+      ],
+      caseStudy: {
+        title: "Final Project: Professional Photo Editing",
+        description: "Menyelesaikan project akhir dengan workflow profesional.",
+        requirements: [
+          "Non-destructive editing workflow",
+          "Color grading final",
+          "Export sesuai kebutuhan platform"
+          ]
+        }
+      }
+    ]
   }
   
 ];
