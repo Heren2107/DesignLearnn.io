@@ -555,7 +555,7 @@ const coursesData = [
       name: "Ardi Afriansyah",
       role: "Photographer & Editor",
       bio: "Profesional di bidang fotografi dan digital imaging dengan pengalaman dalam photo editing, retouching, dan visual composition untuk kebutuhan komersial dan kreatif.",
-      image: "ardi.jpg"
+      image: "ardi.JPG"
     },
     whatYouLearn: [
   "Understand the basic tools and interface of Adobe Photoshop",
@@ -709,4 +709,5 @@ const testimonialsData = [
     location: "Surabaya"
   }
 ];
+
 
